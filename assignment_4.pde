@@ -23,7 +23,6 @@ void draw(){
  background(#7CD4FF); //set the background color to light blue using color selector to choose colors.
  rect(0,height-20,width,20); //draw the platform at the botton of the screen to simulate ground.
  
-
   if(gameOver==false){
     background(#7CD4FF);//set backgournd color again, if the game is not over.
     fill(100);
@@ -51,25 +50,24 @@ if(obstacle.collision(slime)){
 }
   
 
-  //set the booleans 
-  //show the start page if the game hasn't started
+//set the booleans 
+//show the start page if the game hasn't started
   if(startPage==true){
     startScreen();
   }
-  //set winning condition here!
-  //if the player exceeds 1500 points, display win screen.
-  if(score>=1500){
-    displayWin();
-  }
-
+  
 //set the losing condition.
 //if the game is over, show the game over screen.
   if(gameOver==true){
     displayGameOver();
-  }
-  
-}
+  }  
 
+//set winning condition here!
+//if the player exceeds 1500 points, display win screen.
+  if(score>=1500){
+    displayWin();
+  }
+}
 //------------------------------------------------------------------------------------------------------------------------------//
 //I will design the start screen first by putting it in a function to make the later process easier. 
 //basically shows the welcome message and start button.
@@ -95,7 +93,6 @@ void startScreen(){
 }
 
 //Now design the game over and wining screen for this project. 
-
 void displayGameOver(){
   fill(#74C4FF); //set the game over screen into dark blue
   rect(0, 0, width, height); //design a rectangle to cover the whole screen.
@@ -125,7 +122,6 @@ void resetGame(){
 
 //------------------------------------------------------------------------------------------------------------------------------//
 //the key and mouse inputs set for this game.
-
 //according to the control input in slime class, this is to handle slime movement and jumping.
 void keyPressed(){
   slime.slimeControl(key,true);
@@ -150,11 +146,10 @@ void keyReleased(){
     resetGame();
   }
 }
-//------------------------------------------------------------------------------------------------------------------------------//  
 
+//------------------------------------------------------------------------------------------------------------------------------//  
 //After adding the random generator of obstacles, I need a function here in the main tab to generate and activate the obstacles within a specific range.
 float randomAppear(){
   return height-60-random(0,100);
 }
-  
-  
+   
