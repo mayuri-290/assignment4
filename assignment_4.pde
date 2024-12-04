@@ -1,3 +1,8 @@
+//set boolean to activate and switch the conditions of start, game over, and the start page for later use in if statement.
+boolean gameStart=false;
+boolean gameOver=false;
+boolean startPage=true;
+
 void setup() {
   
   size(800,400); //Set the canvas size to 800X400
@@ -8,6 +13,7 @@ void draw(){
   
  background(#7CD4FF); //set the background color to light blue using color selector to choose colors.
  rect(0,height-20,width,20); //draw the platform at the botton of the screen to simulate ground.
+ fill(100);
   
   
 }
@@ -34,4 +40,26 @@ void startScreen(){
   textSize(20);
   text("START",width/2,height/2+45); //Detailed information about text and it's position.
 }
+
+//Now design the game over and wining screen for this project. 
+
+void displayGameOver(){
+  fill(#74C4FF); //set the game over screen into dark blue
+  rect(0, 0, width, height); //design a rectangle to cover the whole screen.
+  fill(0); // black text
+  textAlign(CENTER,CENTER);
+  textSize(32);
+  text("Game Over! Press R to restart!", width/2,height/2); //Detailed information about text and it's position.
+}
+
+void displayWin(){
+  fill(#FAFF74);
+  rect(0, 0, width, height);
+  fill(0); // black text
+  textAlign(CENTER, CENTER);
+  textSize(32);
+  text("You Win! Press R to replay the game!", width / 2, height / 2);
+}
+  
+  
   
