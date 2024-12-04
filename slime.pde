@@ -1,6 +1,7 @@
 //Here is the class for slime. Basically, I would like to design a moving slime. 
 //I will import a set of images for jumping slime in each frame. 
 //Photoshop will be used to make the gif into images in each frame. And then import to processing, and add codes for activate the files.
+//slime image reference website: https://www.pixil.art/art/jumpy-slime-sprite-58c997e79cb2e56
 
 class Slime{
   //set the pos, size and speed for slime.
