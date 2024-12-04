@@ -1,5 +1,6 @@
 //declare variables from classes
 Slime slime;
+Obstacle obstacle;
 
 //set boolean to activate and switch the conditions of start, game over, and the start page for later use in if statement.
 boolean gameStart=false;
@@ -16,25 +17,51 @@ void setup() {
   //the initial position of slime need to be added in setup. Set to specific position.
   //check the function in slime class.
   slime=new Slime(width/4,height-60);//starting position of slime.
+  obstacle=new Obstacle(width,randomAppear(),40,40,"banana.png");//position of obstacles.
 }
 
 void draw(){
-  
  background(#7CD4FF); //set the background color to light blue using color selector to choose colors.
  rect(0,height-20,width,20); //draw the platform at the botton of the screen to simulate ground.
  fill(100);
- 
+
+
+//update and display of slime when the game start.
+  if(gameStart){
+    slime.update();
+    slime.display();
+    obstacle.update();
+    obstacle.display();
+    //the score should increase as the game progresses.
+    score=score+1;
+  }
+  
  //display the score
  fill(0);
  textSize(35);
  text("Score:"+score,50,50);
- score=score+1;
+
   
-  //update and display of slime when the game start.
-  if(gameStart){
-    slime.update();
-    slime.display();
+  //set the booleans 
+  //show the start page if the game hasn't started
+  if(startPage==true){
+    startScreen();
   }
+  //set winning condition here!
+  //if the player exceeds 1500 points, display win screen.
+  if(score>=1500){
+    displayWin();
+  }
+  //set the losing condition.
+//if the game is over, show the game over screen.
+  if(gameOver){
+    displayGameOver();
+  }else{
+    background(#7CD4FF);
+    fill(100);
+    rect(0,height-20,width,20);
+}
+
 }
 
 //------------------------------------------------------------------------------------------------------------------------------//
@@ -82,8 +109,26 @@ void displayWin(){
 }
 //------------------------------------------------------------------------------------------------------------------------------//
 //the key and mouse inputs set for this game.
+
+//according to the control input in slime class, this is to handle slime movement and jumping.
 void keyPressed(){
   slime.slimeControl(key,true);
+}
+
+//Mouse click to start the game when start button is clicked.
+//If the game hasn't started, check if the mouse clocked the start button.
+void mousePressed(){
+  if(gameStart==false){
+    if(mouseX>width/2-100&&mouseX<width/2+100&&mouseY>height/2+20&&mouseY<height/2+70){
+      gameStart=true;
+      startPage=false;
+    }
+  }
+}
+
+//After adding the random generator of obstacles, I need a function here in the main tab to generate and activate the obstacles within a specific range.
+float randomAppear(){
+  return height-60-random(0,100);
 }
   
   
