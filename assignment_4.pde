@@ -6,10 +6,13 @@ boolean gameStart=false;
 boolean gameOver=false;
 boolean startPage=true;
 
+//set a score system for this game. The aim is to track players progress.
+//Also for late use: I will set a winning condition. So score is needed.
+int score=0; 
+
 void setup() {
   
   size(800,400); //Set the canvas size to 800X400
-  
   //the initial position of slime need to be added in setup. Set to specific position.
   //check the function in slime class.
   slime=new Slime(width/4,height-60);//starting position of slime.
@@ -20,6 +23,12 @@ void draw(){
  background(#7CD4FF); //set the background color to light blue using color selector to choose colors.
  rect(0,height-20,width,20); //draw the platform at the botton of the screen to simulate ground.
  fill(100);
+ 
+ //display the score
+ fill(0);
+ textSize(35);
+ text("Score:"+score,50,50);
+ score=score+1;
   
   //update and display of slime when the game start.
   if(gameStart){
