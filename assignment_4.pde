@@ -1,3 +1,6 @@
+//declare variables from classes
+Slime slime;
+
 //set boolean to activate and switch the conditions of start, game over, and the start page for later use in if statement.
 boolean gameStart=false;
 boolean gameOver=false;
@@ -7,6 +10,9 @@ void setup() {
   
   size(800,400); //Set the canvas size to 800X400
   
+  //the initial position of slime need to be added in setup. Set to specific position.
+  //check the function in slime class.
+  slime=new Slime(width/4,height-60);//starting position of slime.
 }
 
 void draw(){
@@ -15,9 +21,14 @@ void draw(){
  rect(0,height-20,width,20); //draw the platform at the botton of the screen to simulate ground.
  fill(100);
   
-  
+  //update and display of slime when the game start.
+  if(gameStart){
+    slime.update();
+    slime.display();
+  }
 }
 
+//------------------------------------------------------------------------------------------------------------------------------//
 //I will design the start screen first by putting it in a function to make the later process easier. 
 //basically shows the welcome message and start button.
 
@@ -60,6 +71,10 @@ void displayWin(){
   textSize(32);
   text("You Win! Press R to replay the game!", width / 2, height / 2);
 }
-  
+//------------------------------------------------------------------------------------------------------------------------------//
+//the key and mouse inputs set for this game.
+void keyPressed(){
+  slime.slimeControl(key,true);
+}
   
   
