@@ -22,21 +22,18 @@ void setup() {
 void draw(){
  background(#7CD4FF); //set the background color to light blue using color selector to choose colors.
  rect(0,height-20,width,20); //draw the platform at the botton of the screen to simulate ground.
+ 
+
+  if(gameOver==false){
+    background(#7CD4FF);//set backgournd color again, if the game is not over.
+    fill(100);
+    rect(0,height-20,width,20);
+}
 
 //display the score
  fill(0);
  textSize(35);
- text("Score:"+score,50,50);
- 
-//set the losing condition.
-//if the game is over, show the game over screen.
-  if(gameOver==true){
-    displayGameOver();
-  }else{
-    background(#7CD4FF);
-    fill(100);
-    rect(0,height-20,width,20);
-}
+ text("Score:"+score,111,50);//position of text
 
 //update and display of slime when the game start.
   if(gameStart){
@@ -65,7 +62,12 @@ if(obstacle.collision(slime)){
     displayWin();
   }
 
-
+//set the losing condition.
+//if the game is over, show the game over screen.
+  if(gameOver==true){
+    displayGameOver();
+  }
+  
 }
 
 //------------------------------------------------------------------------------------------------------------------------------//
