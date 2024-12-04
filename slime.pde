@@ -9,7 +9,7 @@ class Slime{
  PVector velocity; //movement speed in x and y 
  float w=40; //size of slime (w and h)
  float h=40;
- float gravity=0.5; // control the falling of slim while jumping
+ float accelerationGravity=0.5; // control the falling(gravity) of slim while jumping
  
  //I design to let the slime jum by clicking space, the maximum jumping times are limited to 2 times. 
  float jumpHeight=-10;
@@ -38,7 +38,7 @@ class Slime{
 void update(){
  //add gravity and position to slime
  //apply gravity
-  velocity.y=velocity.y+gravity;
+  velocity.y=velocity.y+accelerationGravity;
   position=position.add(velocity);
   
  //set a limitation, so that the slime don't fall below the platform
