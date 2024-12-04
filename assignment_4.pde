@@ -12,7 +12,6 @@ boolean startPage=true;
 int score=0; 
 
 void setup() {
-  
   size(800,400); //Set the canvas size to 800X400
   //the initial position of slime need to be added in setup. Set to specific position.
   //check the function in slime class.
@@ -23,8 +22,21 @@ void setup() {
 void draw(){
  background(#7CD4FF); //set the background color to light blue using color selector to choose colors.
  rect(0,height-20,width,20); //draw the platform at the botton of the screen to simulate ground.
- fill(100);
 
+//display the score
+ fill(0);
+ textSize(35);
+ text("Score:"+score,50,50);
+ 
+//set the losing condition.
+//if the game is over, show the game over screen.
+  if(gameOver==true){
+    displayGameOver();
+  }else{
+    background(#7CD4FF);
+    fill(100);
+    rect(0,height-20,width,20);
+}
 
 //update and display of slime when the game start.
   if(gameStart){
@@ -36,12 +48,12 @@ void draw(){
     score=score+1;
   }
   
- //display the score
- fill(0);
- textSize(35);
- text("Score:"+score,50,50);
-
+//check collision between slime and obstacles.
+if(obstacle.collision(slime)){
+  gameOver=true; //when the slime touches the obstacles, activate game over!
+}
   
+
   //set the booleans 
   //show the start page if the game hasn't started
   if(startPage==true){
@@ -52,15 +64,7 @@ void draw(){
   if(score>=1500){
     displayWin();
   }
-  //set the losing condition.
-//if the game is over, show the game over screen.
-  if(gameOver){
-    displayGameOver();
-  }else{
-    background(#7CD4FF);
-    fill(100);
-    rect(0,height-20,width,20);
-}
+
 
 }
 
@@ -107,6 +111,16 @@ void displayWin(){
   textSize(32);
   text("You Win! Press R to replay the game!", width / 2, height / 2);
 }
+
+//design the reset function:
+void resetGame(){
+  slime.reset(width/4,height-60);// reset slime to start position.
+  gameOver=false;
+  score=0;// set the score to 0.
+  gameStart=true;//make game start to true to activate game play.
+  obstacle.reset(0,height);// reset obstacles to start position.
+}
+
 //------------------------------------------------------------------------------------------------------------------------------//
 //the key and mouse inputs set for this game.
 
@@ -125,6 +139,16 @@ void mousePressed(){
     }
   }
 }
+
+//key released function need to be set to handle slime movement and jumping. 
+//when releasing the key, the slime should stop moving.
+void keyReleased(){
+  slime.slimeControl(key,false);
+  if(gameOver&&key=='r'){
+    resetGame();
+  }
+}
+//------------------------------------------------------------------------------------------------------------------------------//  
 
 //After adding the random generator of obstacles, I need a function here in the main tab to generate and activate the obstacles within a specific range.
 float randomAppear(){

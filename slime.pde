@@ -97,4 +97,13 @@ void display(){
   }
 }
 
+//reset the slime's position when the game is reset.
+void reset(float x,float y){
+  position=new PVector(x,y);//position of slime
+  velocity.x=0;//reset every variables to 0.
+  velocity.y=0;
+  
+  jumpCount=0;
+  currentFrame=0;
+}
 }

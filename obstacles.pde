@@ -2,7 +2,7 @@
 //I will import the image for obstacle into the game.
 //The obstacle will move in random heights.
 //The speed of moving obstacles will be faster throughout the gameplay. 
-//
+//obstacle image reference website: https://x.com/Mr_Pixelor/status/1133881892929974272
 
 class Obstacle{
   PVector position;
@@ -30,8 +30,6 @@ void update(){
     position.x=width;
     position.y=randomAppear(); //set the random height.
   }
-  
-  
 }
 
 //display the obstacle on the screen based on the imported png.
@@ -39,47 +37,19 @@ void display(){
   image(obstacleImage,position.x,position.y,size.x,size.y);//activate the obstacle image.
 }
 
+//check the collision, the slime's x,y,w,h should touch the x,y,w,h of obstacles to lose the game. 
+boolean collision(Slime slime){
+  return slime.position.x<position.x+size.x&&slime.position.x+slime.w>position.x&&slime.position.y<position.y+size.y&&slime.position.y+slime.h>position.y;
+}
+
 //Set a random appearing for obstacles, it should randomly appear from the right side.
   float randomAppear(){
     return height-60-random(0,100); //make sure the random appearing height should be in the range of jumpable range.
   }
-  
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+//reset the obstacle's position and speed when the game starts.
+void reset(float x,float y){
+  position=new PVector(x,y);
+  speed=5;//reset the speed to initial set value.
+}
 }
