@@ -2,11 +2,11 @@
 //I will import the image for obstacle into the game.
 //The obstacle will move in random heights.
 //The speed of moving obstacles will be faster throughout the gameplay. 
+//
 
 class Obstacle{
   PVector position;
   PVector size;
-<<<<<<< HEAD
   float speed=5;
   PImage obstacleImage;
   
@@ -44,12 +44,7 @@ void display(){
     return height-60-random(0,100); //make sure the random appearing height should be in the range of jumpable range.
   }
   
-=======
-  float speed=5
-  PImage obstacleImage;
-  
->>>>>>> 78e1cd2fe6dc04563ea6eeca1afc314301570e8d
-  
+
   
   
   
