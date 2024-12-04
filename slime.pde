@@ -4,31 +4,43 @@
 
 class Slime{
   //set the pos, size and speed for slime.
- PVector position;
- PVector velocity;
- float w=40;
+ PVector position; //pos of slime (x and y coordinates)
+ PVector velocity; //movement speed in x and y 
+ float w=40; //size of slime (w and h)
  float h=40;
- float gravity=0.5;
+ float gravity=0.5; // control the falling of slim while jumping
  
  //I design to let the slime jum by clicking space, the maximum jumping times are limited to 2 times. 
- float jumHeight=-10;
+ float jumpHeight=-10;
  int jumpCount=0;
  int maxJumps=2;
+ 
+ //frame countrol for slime images each frame.
+ PImage[]slimeFrames; //use array to store all the slime movement frame images.
+ int currentFrame=0; //Track the current frame of slime animation.
+ int frameDelay=6; //delay to control the animation.
+ int frameTracker=0; //track the switching frames.
  
  //set the function to initialise the variables and condition for slime. 
  Slime(float x, float y){
    position=new PVector(x,y);// position of slime
    velocity=new PVector(0,0);//no speed required 
  
+ //the frames need to be stored and used in slimeFrame array, there are total of 12 frames I added. 
+ slimeFrames=new PImage[12];
+ //a loop is needed here to perform the animation, start from slime1.png-slime2.png-slime3.png......ect.
+ for(int i=0;i<12;i++){
+   slimeFrames[i]=loadImage("slime"+(i+1)+".png");//an arithmetic function is needed here to realize the loop of each frames.
+ }
  }
   
 void update(){
-  //add gravity and position to slime
-  //apply gravity
+ //add gravity and position to slime
+ //apply gravity
   velocity.y=velocity.y+gravity;
   position=position.add(velocity);
   
-  //set a limitation, so that the slime don't fall below the platform
+ //set a limitation, so that the slime don't fall below the platform
   if(position.y>=height-60){
     position.y=height-60;
     velocity.y=0;
@@ -39,15 +51,28 @@ void update(){
  //constrain is needed
  position.x=constrain(position.x,0,width-w);
  
+ //frameCount also need to be updated for the animation
+ frameTracker=frameTracker+1;
+ 
+ //change the frame based on the frame tracker.
+ if(frameTracker>=frameDelay){
+   frameTracker=0; //reset
+   currentFrame=currentFrame+1;//move to the next frame.
+ 
+ //if the current frame reaches the last frame, start over again.
+ if(currentFrame>=slimeFrames.length){
+   currentFrame=0; //reset frame to activate loop effect.
+ }
+ }
 }
 
 void display(){
-  
-  
+  //display the slime animation frame
+  image(slimeFrames[currentFrame],position.x,position.y,w,h);
 }
   
-  //control input is needed to control the slime. I will use char this time. It will be easier to modify changes in main tab.
-  //since it is a horizontal game, the slime will basically move left and right using "a" and "d".
+ //control input is needed to control the slime. I will use char this time. It will be easier to modify changes in main tab.
+ //since it is a horizontal game, the slime will basically move left and right using "a" and "d".
   void slimeControl(char key,boolean isPressed){
    if(key=='a'){
      if(isPressed){
@@ -65,8 +90,10 @@ void display(){
     }
   }
   
-  if(key==' '&&isPresedded&&jumpCount<maxJumps){
+  if(key==' '&&isPressed&&jumpCount<maxJumps){
    velocity.y=jumpHeight; //jump with space
    jumpCount=jumpCount+1;
   }
+}
+
 }
