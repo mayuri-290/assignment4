@@ -64,7 +64,7 @@ if(obstacle.collision(slime)){
 
 //set winning condition here!
 //if the player exceeds 1500 points, display win screen.
-  if(score>=1500){
+  if(score>=1400){
     displayWin();
   }
 }
